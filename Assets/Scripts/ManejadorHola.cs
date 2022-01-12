@@ -42,7 +42,10 @@ namespace HolaMundo
 
         private void EtiquetasEstado()
         {
+            string modo = NetworkManager.Singleton.IsHost?"Host" : NetworkManager.Singleton.IsServer? "Servidor":"Cliente";
 
+            GUILayout.Label("Transporte: " + NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetType().Name);
+            GUILayout.Label("Modo: " + modo);
         }
 
         private void EnviarNuevaPosicion()

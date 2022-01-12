@@ -42,7 +42,7 @@ namespace HolaMundo
 
         private void EtiquetasEstado()
         {
-            string modo = NetworkManager.Singleton.IsHost?"Host" : NetworkManager.Singleton.IsServer? "Servidor":"Cliente";
+            string modo = NetworkManager.Singleton.IsHost ? "Host" : NetworkManager.Singleton.IsServer ? "Servidor" : "Cliente";
 
             GUILayout.Label("Transporte: " + NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetType().Name);
             GUILayout.Label("Modo: " + modo);
@@ -50,7 +50,15 @@ namespace HolaMundo
 
         private void EnviarNuevaPosicion()
         {
-
+            if (GUILayout.Button(NetworkManager.Singleton.IsServer ? "Mover" : "Peticion cambio posicion"))
+            {
+                NetworkObject objetoJugador = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
+                if (objetoJugador != null)
+                {
+                    HolaMundoJugador jugador = objetoJugador.GetComponent<HolaMundoJugador>();
+                    jugador.Mover();
+                }
+            }
         }
     }
 }
